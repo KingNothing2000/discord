@@ -43,7 +43,8 @@ async def on_voice_state_update(member, before, after):
 
     vc = discord.utils.get(bot.voice_clients, guild=member.guild)
 
-    if after.channel and after.channel.id == VOICE_CHANNEL_ID:
+    # Verifica que el usuario NO estaba en el canal antes y AHORA sí está en el canal objetivo
+    if before.channel is None and after.channel and after.channel.id == VOICE_CHANNEL_ID:
         if vc is None or not vc.is_connected():
             # Si el bot no está en el canal, lo conecta
             vc = await after.channel.connect()
