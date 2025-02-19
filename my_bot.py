@@ -1,13 +1,18 @@
 import discord
 from discord.ext import commands
 import asyncio
+import os
+from dotenv import load_dotenv
 
-# Configuración
-TOKEN = "MTM0MTQxNDAwNDI3ODY5MzkyOA.G4uquS.Z5dbx778dMIm-ijzO89nJJvj6uC9UoYL7GTnSc"
-GUILD_ID = 1218246233072734208  # Reemplaza con el ID de tu servidor
-VOICE_CHANNEL_ID = 1218246233072734213  # Reemplaza con el ID del canal de voz
-NOTIFY_USER_IDS = [1202107051891761224, 310248999275724800]  # IDs de amigos a notificar
-AUDIO_FILE = "alerta.mp3"  # Nombre del archivo de sonido en la misma carpeta
+# Cargar variables desde el archivo .env
+load_dotenv()
+
+TOKEN = os.getenv("DISCORD_TOKEN")
+GUILD_ID = int(os.getenv("GUILD_ID"))
+VOICE_CHANNEL_ID = int(os.getenv("VOICE_CHANNEL_ID"))
+AUDIO_FILE = os.getenv("AUDIO_FILE")
+NOTIFY_USER_IDS = list(map(int, os.getenv("NOTIFY_USER_IDS").split(",")))  # Convierte a lista de números
+
 
 # Intents necesarios
 intents = discord.Intents.default()
