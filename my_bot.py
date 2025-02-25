@@ -77,4 +77,20 @@ async def notify_users(guild, joined_member):
                 except discord.Forbidden:
                     print(f"No puedo enviar mensaje a {user.display_name} (DMs bloqueados)")
 
+@bot.command()
+async def hola(ctx):
+    general_channel = discord.utils.get(ctx.guild.text_channels, name="general")  # Busca el canal #general
+    if general_channel:
+        await general_channel.send("¡Hola estupidoooooooooo! 😊")
+    else:
+        await ctx.send("No encontré el canal #general.")
+
+@bot.command()
+async def info(ctx):
+    await ctx.send(f"Autor: {ctx.author}")
+    await ctx.send(f"ID del autor: {ctx.author.id}")
+    await ctx.send(f"Servidor: {ctx.guild}")
+    await ctx.send(f"Canal: {ctx.channel}")
+    await ctx.send(f"Mensaje: {ctx.message.content}")
+
 bot.run(TOKEN)
